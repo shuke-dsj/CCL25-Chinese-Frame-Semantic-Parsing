@@ -8,7 +8,7 @@
 
 ## Task 1：Frame Identification
 
-![Task 1 模型概览](images/task1.png)
+[查看 Task 1 的三张逐模型架构图](model-architectures.md#task-1-rope-baseline)
 
 **Baseline / A0。** BERT 最后四层平均表示经 Frame-specific Q/K 和 RoPE，在 Target 起止位置计算 713 类 logits。修复训练时 global step 重复推进的问题后，记录中的 Dev Accuracy 从 69.43% 到 73.52%。实现：`tasks/task1/model.py`、`train.py`。
 
@@ -18,7 +18,7 @@
 
 ## Task 2：Argument Identification
 
-![Task 2 模型概览](images/task2.png)
+[查看 Task 2 的五张逐模型架构图](model-architectures.md#task-2-b--b1-globalpointer)
 
 **B1 GlobalPointer 与合法 Span。** 句子和 Target 编码后，Q/K 打分得到 L×L 起止矩阵。Valid Span Mask 将损失限制在允许的候选空间，推理时用阈值和 Safe Decode 剔除非法位置并映射字符坐标。校准后 P/R/F1 为 87.52/86.96/87.24%。阈值和解码不是神经网络层。实现：`model.py`、`decoding.py`、`train.py`。
 
@@ -34,7 +34,7 @@
 
 ## Task 3：Argument Role Identification
 
-![Task 3 模型概览](images/task3.png)
+[查看 Task 3 的交互分类器与验证器架构图](model-architectures.md#task-3-cc2-interaction)
 
 **Baseline 与 Frame 约束。** 最后四层平均表示经 role-specific Q/K，对已知 Span 的起止位置分类。原记录总参数约 205.13M。Gold Frame 的硬约束将 Role Top-1 从 74.18% 提至 81.89%，但预测 Frame 出错时硬掩码会屏蔽正确 Role；软 Frame 先验保留概率分布和全局回退。
 

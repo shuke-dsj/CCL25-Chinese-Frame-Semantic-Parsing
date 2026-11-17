@@ -14,6 +14,23 @@
 
 以上数字来自原实验记录，不是本次重新运行的结果。模型选择、阈值和集成权重在 Dev 上确定；不同任务的指标不能直接比较。更多模型结构、负实验、指标口径见[架构与实验说明](docs/architecture.md)。
 
+## 实验工作与阅读入口
+
+项目从三个任务的误差分析出发，完成训练调度修复、合法候选与评价审计、Target 和标签语义建模、结构消融、阈值校准、专家集成及候选验证。当前归档可核查 **31 份逐轮指标文件、148 行指标记录**；这反映保留下来的实验记录规模，不等同于独立训练次数。
+
+| 文档 | 内容 |
+|---|---|
+| [Task 1 实验](docs/task1-experiments.md) | Scheduler 修复、Last/Last4、Marker、Prototype、长尾分桶与融合 |
+| [Task 2 实验](docs/task2-experiments.md) | A/B/C 消融、Target Gate、Content、G1/G2、H1/H1-R、校准及线上验证 |
+| [Task 3 实验](docs/task3-experiments.md) | Frame prior、C/C2、D/D2、C3、D3/D4、I1B-R 与完整流水线 |
+| [逐模型架构图](docs/model-architectures.md) | 十个关键模型的张量维度、计算流程与原图风格重绘 |
+| [实验规模与证据](docs/experiment-scale.md) | 实验目录清单和逐轮 CSV |
+| [系统概览](docs/architecture.md) | 三任务连接、指标与复现条件 |
+
+Task 1 的主要改进是修复训练并引入 Frame 定义原型；Target-aware 重点降低计算和显存。Task 2 通过训练/解码候选空间对齐建立基准，验证 Target、内容、语义和边界分支，再以校准集成利用互补误差。Task 3 用显式 Predicate–Argument 交互减少角色头参数，以定义边缘化和 Frame 软先验保留不确定性，并针对上游错误候选训练验证器。
+
+关键对照包括：Task 1 十轮 baseline 73.5217% → hybrid 74.2609%；Task 2 校准 B 87.2391% → B/D/E/H 87.9759%；Task 3 完整流水线 baseline 59.7602% → 主角色集成 60.9740% → 保守拒识 61.3454%。这些提升分别使用各任务指标，不能相加为统一系统分数。
+
 ## 目录
 
 ```text
