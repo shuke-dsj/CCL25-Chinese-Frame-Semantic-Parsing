@@ -174,6 +174,8 @@ L_{C2}=L_{frame-local}+0.2L_{global}
 
 ### C——Efficient Predicate–Argument Interaction
 
+![Task 3 C／C2：Predicate–Argument 交互与混合训练目标](images/task3-interaction.png)
+
 - **改动位置**：替代 Baseline 的超宽 Role-specific Q/K 角色头。
 - **Span 表示**：Target 和 Argument 都取 `[start;end;mean]`，投影到 256 维。
 - **Interaction**：`[argument; target; argument*target; |argument-target|; distance; width]`。
@@ -220,6 +222,8 @@ L_{C2}=L_{frame-local}+0.2L_{global}
 - **失败原因**：D3 训练时是同一 Gold Frame 内 ranking，推理时却直接比较跨 Frame 分数；训练/推理 score space 不一致。
 
 ### I0/I1B-R——Candidate Span Verifier
+
+![Task 3 I1B-R：Frame 条件候选验证器](images/task3-verifier.png)
 
 - **动机**：6537 个 Task2 predicted spans 中只有 4856 个边界正确；Task3 训练只看 Gold Span，存在明显 train–test mismatch。
 - **输入**：Task2 候选 Span + Target + Task1 Frame probability。

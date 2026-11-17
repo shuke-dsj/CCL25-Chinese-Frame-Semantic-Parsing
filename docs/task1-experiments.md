@@ -10,6 +10,8 @@
 
 ### Baseline 的 token 流
 
+![Task 1：RoPE Baseline](images/task1-baseline.png)
+
 ```text
 [CLS] sentence_left [T_START] target [T_END] sentence_right [SEP]
         ↓
@@ -108,6 +110,8 @@ Task1 为单标签分类，主指标是 Dev Accuracy；P/R/F1 不作为该任务
 
 ### E2/E3——Target-aware Last / Last4
 
+![Task 1：Target-aware 与可选基线集成](images/task1-target-aware.png)
+
 - **动机**：Baseline 先生成全部 Token 的 q/k，最后只取 Target 起止位置，存在明显无效计算。
 - **改动位置**：BERT 输出之后、原始 Dense/RoPE 分类头位置。
 - **新结构**：
@@ -142,6 +146,8 @@ Task1 为单标签分类，主指标是 Dev Accuracy；P/R/F1 不作为该任务
 - **启发**：Task1 的瓶颈不是“模型不知道 Target 在哪里”，而是 Frame 的长尾和标签语义。
 
 ### E6——Frame Definition Prototype
+
+![Task 1：定义原型、上下文匹配与校准融合](images/task1-prototype.png)
 
 - **动机**：普通 713 类分类头无法给 75 个 unseen Frame 学习正样本；需要利用 Frame 名称、定义和 FE 名称。
 - **改动位置**：替代离散分类头，不改变句子 BERT 的主要编码流程。

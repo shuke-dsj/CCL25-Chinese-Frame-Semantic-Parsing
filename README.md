@@ -23,7 +23,7 @@
 | [Task 1 实验](docs/task1-experiments.md) | Scheduler 修复、Last/Last4、Marker、Prototype、长尾分桶与融合 |
 | [Task 2 实验](docs/task2-experiments.md) | A/B/C 消融、Target Gate、Content、G1/G2、H1/H1-R、校准及线上验证 |
 | [Task 3 实验](docs/task3-experiments.md) | Frame prior、C/C2、D/D2、C3、D3/D4、I1B-R 与完整流水线 |
-| [逐模型架构图](docs/model-architectures.md) | 十个关键模型的张量维度、计算流程与原图风格重绘 |
+| [模型架构导航](docs/model-architectures.md) | 十张架构图嵌入上述各 Task 的对应实验章节，附张量维度与代码映射 |
 | [实验规模与证据](docs/experiment-scale.md) | 实验目录清单和逐轮 CSV |
 | [系统概览](docs/architecture.md) | 三任务连接、指标与复现条件 |
 

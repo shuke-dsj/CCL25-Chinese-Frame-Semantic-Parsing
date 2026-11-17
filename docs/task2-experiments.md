@@ -55,6 +55,8 @@ Safe Mask由数据坐标规则直接推导，属于正确性修复，不包装�
 
 ### 2.1 基础模型
 
+![Task 2：GlobalPointer、合法候选与训练／推理流程](images/task2-baseline.png)
+
 Baseline使用 Chinese BERT-WWM-ext。Dataset在目标词两侧插入两个 unused token作为Target Marker：
 
 ```text
@@ -177,6 +179,8 @@ D是受上述方向启发的轻量适配，不是对某篇论文的完整复现�
 
 ### 5.2 加入的组件
 
+![Task 2 D：Target-conditioned Gate](images/task2-target-gate.png)
+
 对Target Marker之间的字符做mean pooling得到`p`：
 
 ```text
@@ -215,6 +219,8 @@ D说明不应强改写全部token；E转而补充GlobalPointer显式缺少的Spa
 - Swayamdipta et al. (2017)：将FrameNet argument作为完整segment建模。
 
 ### 6.2 加入的组件
+
+![Task 2 E：Content-aware Span Scorer](images/task2-content.png)
 
 将token投影到32维，通过prefix sum一次构造所有Span mean：
 
@@ -317,6 +323,8 @@ BERT联合编码句子与定义。每个FE名称池化为query；在B的GlobalPo
 
 ### 8.4 G1：Definition-guided Role-query GlobalPointer
 
+![Task 2 G1：定义引导的角色查询与 Span 打分](images/task2-definition.png)
+
 G1从B Token-best warm-start，使用Oracle/Gold Frame，主干lr=1e-5、新role head lr=5e-5，FGM，5轮。Task2分数取所有FE role logits的最大值，同时记录role-span F1。
 
 | 指标 | threshold=0 | 校准后 |
@@ -364,6 +372,8 @@ Frame语义对边界过于间接，而Task2的核心误差是起点/终点和覆
 - Li et al. (2020) MRC-NER：start/end与Span matching联合建模可处理多Span和嵌套实体。此处是跨任务结构借鉴，不宣称为SRL论文复现。
 
 ### 9.2 加入的组件
+
+![Task 2 H1／H1-R：边界辅助监督与推理残差](images/task2-boundary.png)
 
 ```text
 BERT shared hidden states
